@@ -1,113 +1,93 @@
+'use client';
+
 import {
   FaHtml5,
   FaCss3Alt,
   FaJsSquare,
   FaReact,
-  FaNodeJs,
   FaGitAlt,
+  FaFigma,
 } from "react-icons/fa";
-import { SiTailwindcss, SiNextdotjs } from "react-icons/si"; // Tailwind and Next.js icons
-import { DiPhotoshop, DiIllustrator } from "react-icons/di"; // Photoshop and Illustrator icons
+import { SiTailwindcss, SiNextdotjs, SiTypescript } from "react-icons/si";
+import { DiPhotoshop } from "react-icons/di";
 
 const Skills = () => {
+  const skills = [
+    { icon: <FaHtml5 className="text-[#E34F26]" />, label: "HTML5" },
+    { icon: <FaCss3Alt className="text-[#1572B6]" />, label: "CSS3" },
+    { icon: <FaJsSquare className="text-[#F7DF1E]" />, label: "JavaScript" },
+    { icon: <SiTypescript className="text-[#3178C6]" />, label: "TypeScript" },
+    { icon: <FaReact className="text-[#61DAFB]" />, label: "React.js" },
+    { icon: <SiTailwindcss className="text-[#38BDF8]" />, label: "Tailwind CSS" },
+    { icon: <SiNextdotjs className="text-[#999999]" />, label: "Next.js" },
+    { icon: <FaFigma className="text-[#A259FF]" />, label: "Figma" },
+    { icon: <DiPhotoshop className="text-[#31A8FF]" />, label: "Photoshop" },
+  ];
+
   return (
-    <section id="skills" className="py-16 bg-purple-950 text-white">
-      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-10">
-        {/* Left Section: Visual Elements */}
-        <div className="flex justify-center items-center">
+    <section id="skills" className="bg-white py-24 px-6 text-[#4B2E2E]">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        {/* Left SVG Updated */}
+        <div className="flex justify-center">
           <svg
+            role="img"
+            aria-label="Decorative skills pie chart"
             xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 200 200"
-            className="w-40 h-40 sm:w-60 sm:h-60"
+            viewBox="0 0 400 400"
+            className="max-w-full h-auto"
           >
-            {/* Outer diamond */}
-            <polygon points="100,10 130,60 100,110 70,60" fill="#F5A623" />
+            {/* خلفية الدائرة الكبيرة */}
+            <circle cx="200" cy="200" r="160" fill="#FBDADA" />
 
-            {/* Inner diamond */}
-            <polygon
-              points="100,50 120,80 100,110 80,80"
-              fill="none"
-              stroke="green" /* Changed to green */
-              strokeWidth="3"
-            />
+            {/* تقسيم الدائرة إلى 6 أجزاء متساوية */}
+            {[...Array(6)].map((_, i) => {
+              const angle1 = (i * 60) * (Math.PI / 180);
+              const angle2 = ((i + 1) * 60) * (Math.PI / 180);
 
-            {/* Triangles around */}
-            <polygon
-              points="60,40 70,60 50,60"
-              fill="none"
-              stroke="green" /* Changed to green */
-              strokeWidth="3"
-            />
-            <polygon
-              points="140,40 150,60 130,60"
-              fill="none"
-              stroke="green" /* Changed to green */
-              strokeWidth="3"
-            />
-            <polygon
-              points="100,140 120,160 80,160"
-              fill="none"
-              stroke="green" /* Changed to green */
-              strokeWidth="3"
-            />
+              const x1 = 200 + 160 * Math.cos(angle1);
+              const y1 = 200 + 160 * Math.sin(angle1);
+              const x2 = 200 + 160 * Math.cos(angle2);
+              const y2 = 200 + 160 * Math.sin(angle2);
 
-            {/* Circular Elements */}
-            <circle cx="50" cy="90" r="5" fill="#F5A623" />
-            <circle cx="150" cy="90" r="5" fill="#F5A623" />
-            <circle cx="100" cy="160" r="5" fill="#F5A623" />
+              // الألوان: نضيف الأخضر #2a825b فقط في القطعتين 1 و4
+              const colors = [
+                "#A74B5D",
+                "#2a825b",  // الأخضر هنا
+                "#E87E7E",
+                "#2a825b",  // والأخضر هنا أيضاً
+                "#C0575F",
+                "#D96B6B"
+              ];
 
-            {/* Additional decorative elements */}
-            <rect
-              x="85"
-              y="85"
-              width="30"
-              height="30"
-              fill="none"
-              stroke="green" /* Changed to green */
-              strokeWidth="2"
-            />
+              return (
+                <path
+                  key={i}
+                  d={`M200 200 L${x1.toFixed(2)} ${y1.toFixed(2)} A160 160 0 0 1 ${x2.toFixed(2)} ${y2.toFixed(2)} Z`}
+                  fill={colors[i]}
+                  opacity="0.85"
+                  stroke="#8A3A46"
+                  strokeWidth="1"
+                />
+              );
+            })}
+
+            {/* الدائرة المركزية */}
+            <circle cx="200" cy="200" r="30" fill="#A74B5D" stroke="#7A3540" strokeWidth="2" />
           </svg>
         </div>
 
-        {/* Right Section: Skills */}
-        <div className="text-center mt-8 sm:mt-0">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-10 text-yellow-500">
+        {/* Right Skills Grid */}
+        <div className="text-center md:text-left">
+          <h2 className="text-4xl font-serif font-semibold text-[#A74B5D] mb-12">
             My Skills
           </h2>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8">
-            <div className="flex flex-col items-center">
-              <FaHtml5 className="text-3xl text-red-600 mb-4" />
-              <p className="font-semibold text-lg">HTML5</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <FaCss3Alt className="text-3xl text-blue-600 mb-4" />
-              <p className="font-semibold text-lg">CSS3</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <FaJsSquare className="text-3xl text-yellow-400 mb-4" />
-              <p className="font-semibold text-lg">JavaScript</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <FaReact className="text-3xl text-blue-500 mb-4" />
-              <p className="font-semibold text-lg">React.js</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <SiTailwindcss className="text-3xl text-teal-400 mb-4" />
-              <p className="font-semibold text-lg">Tailwind CSS</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <SiNextdotjs className="text-3xl text-gray-400 mb-4" />
-              <p className="font-semibold text-lg">Next.js</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <DiPhotoshop className="text-3xl text-blue-500 mb-4" />
-              <p className="font-semibold text-lg">Photoshop</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <DiIllustrator className="text-3xl text-orange-500 mb-4" />
-              <p className="font-semibold text-lg">Illustrator</p>
-            </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 justify-center md:justify-start">
+            {skills.map((skill, i) => (
+              <div key={i} className="flex flex-col items-center">
+                <div className="text-5xl mb-4">{skill.icon}</div>
+                <p className="text-sm font-medium">{skill.label}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
